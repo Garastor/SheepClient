@@ -1,0 +1,4 @@
+server-status-url: "http://localhost:8080/rest/shepherdmanager/status"
+
+scheduling:
+  server-status: '*/5 * * * * *'
