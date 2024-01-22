@@ -1,4 +1,5 @@
 server-status-url: "http://localhost:8080/rest/shepherdmanager/status"
+order-sheep-url: "http://localhost:8080/rest/shepherdmanager/orderNewSheep/"
 
 scheduling:
   server-status: '*/5 * * * * *'

@@ -15,8 +15,9 @@ public class ShepherdClient {
 
     @Value("${server-status-url}")
     String serverStatusUrl;
+    @Value("${order-sheep-url}")
+    String orderNewSheepUrl;
     RestTemplate restTemplate;
-
 
     /*
      * TODO Use a Rest client to obtain the server status, so this client can be used to obtain that status.
@@ -24,11 +25,15 @@ public class ShepherdClient {
      */
     @Autowired
     public ShepherdClient(GuiInterface guiInterface, RestTemplate restTemplate) {
-        guiInterface.addOrderRequestListener(i -> guiInterface.addServerFeedback("Number of sheep to order: " + i));
         this.restTemplate = restTemplate;
+        guiInterface.addOrderRequestListener(i -> guiInterface.addServerFeedback(orderNewSheep(i)));
     }
 
     public String getServerStatus() {
          return Objects.requireNonNull(restTemplate.getForObject(serverStatusUrl, HttpStatus.class)).getReasonPhrase();
+    }
+
+    public String orderNewSheep(int nofSheepDesired) {
+        return restTemplate.getForObject(orderNewSheepUrl+nofSheepDesired, String.class);
     }
 }
